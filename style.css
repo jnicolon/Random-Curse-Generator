@@ -1,0 +1,78 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+  position: relative;
+}
+
+.pentagram-cont {
+  width: 500px;
+  height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+  margin-top: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+#pentagram-img {
+  position: relative;
+  display: block;
+  height: 100%;
+  opacity: 0;
+}
+
+#flame1 {
+  width: 120px;
+  position: absolute;
+  opacity: 1;
+  left: 60px;
+  top: -50px;
+}
+
+#flame2 {
+  width: 120px;
+  position: absolute;
+  opacity: 1;
+  left: 325px;
+  top: -50px;
+}
+
+#flame3 {
+  width: 120px;
+  position: absolute;
+  opacity: 1;
+  left: 385px;
+  top: 135px;
+}
+
+#flame4 {
+  width: 120px;
+  position: absolute;
+  opacity: 1;
+  left: 200px;
+  top: 280px;
+}
+
+#flame5 {
+  width: 120px;
+  position: absolute;
+  opacity: 1;
+  left: 10px;
+  top: 135px;
+}
+/*# sourceMappingURL=style.css.map */
