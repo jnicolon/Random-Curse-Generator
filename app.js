@@ -41,6 +41,7 @@ class Flames {
 
     static pentagram() {
         document.getElementById('pentagram-img').style.opacity = "1";
+        document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
     }
 
 }
@@ -49,10 +50,9 @@ document.querySelectorAll('.flame').forEach(flame => {
     flame.addEventListener('click', (e) => {  
         if (flamesCounter === 0) {
             Flames.pentagram();
-            console.log("BEGIN THE CURSE!")
         } else {
         Flames.flamesOut(e.target);
         }
-     })
-})
+     });
+});
 
