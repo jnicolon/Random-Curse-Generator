@@ -34,6 +34,8 @@ body {
   display: block;
   height: 100%;
   opacity: 0;
+  -webkit-transition: opacity 3s;
+  transition: opacity 3s;
 }
 
 #flame1 {

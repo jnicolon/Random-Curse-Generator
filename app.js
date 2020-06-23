@@ -1,21 +1,58 @@
+let f1Opacity = 1;
+let f2Opacity = 1;
+let f3Opacity = 1;
+let f4Opacity = 1;
+let f5Opacity = 1;
+
+let flamesCounter = 50;
 
 
-const flame = document.querySelector('#flame');
-
-
-// let tl = gsap.timeline();
-
-
-
-// document.querySelector('#start').addEventListener('click', ()=> {
-//     tl.fromTo('#flame', {y:0, x:250, opacity: 0}, {y:0, x:250, opacity: 1, duration: 2}, )
-//     .to("#flame", {y:450, x:120, ease:"Power1.easeIn", duration: 3})
-//     .to('#flame', {y:172, x:488, ease:"Power1.easeIn", duration: 2})
-//     .to('#flame', {y:172, x:2, ease:"Power1.easeIn", duration: 2})
-//     .to('#flame', {y:450, x:398, ease:"Power1.easeIn", duration: 2})
-//     .to('#flame', {y:0, x:250, ease:"Power1.easeIn", duration: 2})
+class Flames {
+    static flamesOut(flame) {
         
-
+        if (flame.id === "flame1" && f1Opacity > 0.0) {
+            flamesCounter -= 1
+            f1Opacity -= 0.1;
+            f1Opacity = f1Opacity.toPrecision(1)
+            flame.style.opacity = `${f1Opacity}`;
+        } else if (flame.id === "flame2" && f2Opacity > 0.0) {
+            flamesCounter -= 1
+            f2Opacity -= 0.1;
+            f2Opacity = f2Opacity.toPrecision(1)
+            flame.style.opacity = `${f2Opacity}`;
+        } else if (flame.id === "flame3" && f3Opacity > 0.0) {
+            flamesCounter -= 1
+            f3Opacity -= 0.1;
+            f3Opacity = f3Opacity.toPrecision(1)
+            flame.style.opacity = `${f3Opacity}`;
+        } else if (flame.id === "flame4" && f4Opacity > 0.0) {
+            flamesCounter -= 1
+            f4Opacity -= 0.1;
+            f4Opacity = f4Opacity.toPrecision(1)
+            flame.style.opacity = `${f4Opacity}`;
+        } else if (flame.id === "flame5" && f5Opacity > 0.0) {
+            flamesCounter -= 1
+            f5Opacity -= 0.1;
+            f5Opacity = f5Opacity.toPrecision(1)
+            flame.style.opacity = `${f5Opacity}`;
+        };   
         
-//     }
-// )
+    }
+
+    static pentagram() {
+        document.getElementById('pentagram-img').style.opacity = "1";
+    }
+
+}
+
+document.querySelectorAll('.flame').forEach(flame => {
+    flame.addEventListener('click', (e) => {  
+        if (flamesCounter === 0) {
+            Flames.pentagram();
+            console.log("BEGIN THE CURSE!")
+        } else {
+        Flames.flamesOut(e.target);
+        }
+     })
+})
+
