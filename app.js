@@ -15,7 +15,7 @@ const curses = [
     'acid reflux',
     'a bald spot in your anus',
     'sleepy therapists',
-    'like a web toe but for you armpit',
+    'like a web toe but for your armpit',
     'wet socks',
     'someone always looking at your phone screen',
     'stuck in the EEEEEEE of the Macarena',
@@ -84,35 +84,55 @@ class Animations {
 
     static pentagram(){
         let tl = gsap.timeline();
-        tl.to("#pentagram-img", {duration: 1, opacity: 1})
+        tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
+            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.displayCurses})
             
     };
 
-    static cursesInterval() {
-        let rCurse = window.setInterval(Curse.randomCurse, 150);
+    static displayCurses(){
+        document.querySelector('.curse-cont').style.display = "flex";
+        Animations.cursesInterval();
+    }
 
+    static cursesInterval() {
+        let rCurse = window.setInterval(Curse.randomCurse, 100);
         function clear(){
             clearInterval(rCurse)
         }
+        window.setTimeout(clear, 10000);
+    }
 
-        window.setTimeout(clear, 5000);
+    static cursesIn() {
+        gsap.to('.curse-cont', {duration: 5, delay: -3, opacity: 1, onStart: Animations.displayCurses})
+    }
 
+
+
+    static master() {
+        let master = gsap.timeline();
+        master.to(Animations.pentagram())
+              
+        
     }
 
 };
 
-Animations.cursesInterval();
+
+
+
+
+
 
 
 
 document.querySelectorAll('.flame').forEach(flame => {
     flame.addEventListener('click', (e) => {  
         if (flamesCounter === 0) {
-            //Animations.pentagramOn();
-            Animations.pentagram();
+            
+            Animations.master();
         } else {
         Flames.flamesOut(e.target);
         }
