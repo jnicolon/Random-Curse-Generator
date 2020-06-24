@@ -25,7 +25,7 @@ const curses = [
     'people think you wrote chappie'
 ];
 
-class Flames {
+class Functionality {
     static flamesOut(flame) {
         if (flame.id === "flame1" && f1Opacity > 0.0) {
             flamesCounter -= 1
@@ -55,22 +55,15 @@ class Flames {
             flame.style.opacity = `${f5Opacity}`;
         };     
     };
-};
-
-class Curse {
-    static displayCurse(curse) {
-        document.querySelector('.curse').textContent = `${curse}`;
-    };
 
     static randomCurse() {
         let curse = '';
         let index = Math.floor(Math.random() * curses.length)
         curse = curses[index];
-        Curse.displayCurse(curse);
+        return curse;
     };
+};
 
-    
-}
 
 
 class Animations {
@@ -78,53 +71,43 @@ class Animations {
         document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
     }
 
+    static displayCurse() {
+        let curse = Functionality.randomCurse();
+        console.log(curse);
+        document.querySelector('.curse').textContent = `${curse}`;
+    };
+
     static pentagramDisplay(){
         document.querySelector('.pentagram-cont').style.display = "none";
     }
 
-    static pentagram(){
-        let tl = gsap.timeline();
-        tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
-            .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
-            .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
-            .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.displayCurses})
-            
-    };
 
-    static displayCurses(){
+    static displayCursesCont(){
         document.querySelector('.curse-cont').style.display = "flex";
         Animations.cursesInterval();
     }
 
     static cursesInterval() {
-        let rCurse = window.setInterval(Curse.randomCurse, 100);
+        let rCurse = window.setInterval(Animations.displayCurse, 100);
         function clear(){
             clearInterval(rCurse)
         }
         window.setTimeout(clear, 10000);
     }
 
-    static cursesIn() {
-        gsap.to('.curse-cont', {duration: 5, delay: -3, opacity: 1, onStart: Animations.displayCurses})
-    }
-
-
-
-    static master() {
-        let master = gsap.timeline();
-        master.to(Animations.pentagram())
-              
-        
-    }
+    
+    static master(){
+        let tl = gsap.timeline();
+        tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
+            .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
+            .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
+            .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
+            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.displayCursesCont})
+            
+    };
+    
 
 };
-
-
-
-
-
-
 
 
 
@@ -134,7 +117,7 @@ document.querySelectorAll('.flame').forEach(flame => {
             
             Animations.master();
         } else {
-        Flames.flamesOut(e.target);
+        Functionality.flamesOut(e.target);
         }
      });
 });
