@@ -11,7 +11,7 @@ let flamesCounter = 25;
 
 
 class Flames {
-    
+
     static flamesOut(flame) {
         if (flame.id === "flame1" && f1Opacity > 0.0) {
             flamesCounter -= 1
@@ -48,11 +48,16 @@ class Animations {
         document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
     }
 
+    static pentagramDisplay(){
+        document.querySelector('.pentagram-cont').style.display = "none";
+    }
+
     static pentagram(){
         let tl = gsap.timeline();
         tl.to("#pentagram-img", {duration: 1, opacity: 1})
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -4000, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
+            .to(".pentagram-cont", {duration: 6, delay: -6 , opacity: 0, ease: "power4.in", onComplete: Animation.pentagramDisplay})
             
     };
 
