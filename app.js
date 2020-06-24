@@ -86,7 +86,8 @@ class Animations {
 
     static cursesInOut() {
         let tl = gsap.timeline();
-        tl.to('.curse', {duration: 0.20 , opacity: 0, onComplete: Animations.displayCurse})
+        tl.to('.curse', {duration: 0.20 , opacity: 1, onStart: Animations.displayCurse})
+            .to('.curse', {duration: 0.20 , opacity: 0})
             .to('.curse', {opacity:1, duration: 0.20})
     };
   
@@ -99,8 +100,6 @@ class Animations {
         window.setTimeout(clear, 10000);
     }
 
-    
-    
     static master(){
         let tl = gsap.timeline();
         tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
