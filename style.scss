@@ -39,7 +39,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: hidden;   
+       
 
     display: flex;
     
@@ -50,6 +50,7 @@ body {
     display: block;
     height: 100%;  
     opacity: 0;
+    
     
     
     
@@ -122,6 +123,7 @@ body {
     text-shadow: 1px 1px 6px red;
    
 
+
     span {
         font-size: 2.5rem;
         color: rgb(212, 49, 49)
@@ -147,7 +149,7 @@ button {
 }
 
 
-@media (min-width: 360px) {
+@media (max-width: 360px) {
 
     .pentagram-cont {
         

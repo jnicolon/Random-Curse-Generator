@@ -48,7 +48,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  overflow: hidden;
   display: flex;
 }
 
@@ -155,7 +154,7 @@ button {
   top: 600px;
 }
 
-@media (min-width: 360px) {
+@media (max-width: 360px) {
   .pentagram-cont {
     width: 100vw;
     height: 340px;
