@@ -49,14 +49,13 @@ body {
           align-items: center;
   position: relative;
   overflow: hidden;
-  display: block;
+  display: flex;
 }
 
 #pentagram-img {
   position: relative;
   display: block;
   height: 100%;
-  left: -200px;
   opacity: 0;
 }
 
@@ -148,5 +147,11 @@ body {
   text-align: center;
   font-family: 'Metamorphous', cursive;
   text-transform: capitalize;
+  opacity: 1;
+}
+
+button {
+  position: absolute;
+  top: 600px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -41,7 +41,7 @@ body {
     position: relative;
     overflow: hidden;   
 
-    display: block;
+    display: flex;
     
 }
 
@@ -49,7 +49,6 @@ body {
     position: relative;
     display: block;
     height: 100%;  
-    left: -200px;
     opacity: 0;
     
     
@@ -89,6 +88,10 @@ body {
     top: 135px;
 }
 
+
+
+
+
 .curse-cont {
     display: flex;
     flex-direction: column;
@@ -99,6 +102,7 @@ body {
     padding: 20px;
     //border: 1px solid white;
     width: 600px;
+
     opacity: 0;
     display: none;
     
@@ -129,4 +133,11 @@ body {
     font-family: 'Metamorphous', cursive;
     //text-transform: uppercase;
     text-transform: capitalize;
+    opacity: 1;
+}
+
+
+button {
+    position: absolute;
+    top: 600px;
 }

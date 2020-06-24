@@ -71,24 +71,28 @@ class Animations {
         document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
     }
 
-    static displayCurse() {
-        let curse = Functionality.randomCurse();
-        console.log(curse);
-        document.querySelector('.curse').textContent = `${curse}`;
-    };
-
     static pentagramDisplay(){
         document.querySelector('.pentagram-cont').style.display = "none";
     }
 
-
     static displayCursesCont(){
         document.querySelector('.curse-cont').style.display = "flex";
-        Animations.cursesInterval();
     }
 
+    static displayCurse() {
+        let curse = Functionality.randomCurse();
+        document.querySelector('.curse').textContent = `${curse}`;
+    };
+
+    static cursesInOut() {
+        let tl = gsap.timeline();
+        tl.to('.curse', {duration: 0.20 , opacity: 0, onComplete: Animations.displayCurse})
+            .to('.curse', {opacity:1, duration: 0.20})
+    };
+  
     static cursesInterval() {
-        let rCurse = window.setInterval(Animations.displayCurse, 100);
+        Animations.displayCursesCont();
+        let rCurse = window.setInterval(Animations.cursesInOut, 400);
         function clear(){
             clearInterval(rCurse)
         }
@@ -96,17 +100,17 @@ class Animations {
     }
 
     
+    
     static master(){
         let tl = gsap.timeline();
         tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.displayCursesCont})
+            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.cursesInterval})
+            
             
     };
-    
-
 };
 
 
