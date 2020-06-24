@@ -105,7 +105,7 @@ class Animations {
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.cursesInterval})
+            .to('.curse-cont', {duration: 8, delay: -3, opacity: 1, ease: "power1.in", onStart: Animations.cursesInterval})
             
             
     };
