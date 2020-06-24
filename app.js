@@ -9,9 +9,23 @@ let f5Opacity = 1;
 //Counter for when all the flames are extinguished
 let flamesCounter = 25;
 
+//Curses Array
+const curses = [
+    'your poop will smell like barf',
+    'acid reflux',
+    'a bald spot in your anus',
+    'sleepy therapists',
+    'like a web toe but for you armpit',
+    'wet socks',
+    'someone always looking at your phone screen',
+    'stuck in the EEEEEEE of the Macarena',
+    'maybe your ex was right',
+    'you meet a man with a ponytail',
+    'the venezuelan birthday song is the regular song',
+    'people think you wrote chappie'
+];
 
 class Flames {
-
     static flamesOut(flame) {
         if (flame.id === "flame1" && f1Opacity > 0.0) {
             flamesCounter -= 1
@@ -43,6 +57,22 @@ class Flames {
     };
 };
 
+class Curse {
+    static displayCurse(curse) {
+        document.querySelector('.curse').textContent = `${curse}`;
+    };
+
+    static randomCurse() {
+        let curse = '';
+        let index = Math.floor(Math.random() * curses.length)
+        curse = curses[index];
+        Curse.displayCurse(curse);
+    };
+
+    
+}
+
+
 class Animations {
     static flamesDisplayOff(){
         document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
@@ -55,14 +85,26 @@ class Animations {
     static pentagram(){
         let tl = gsap.timeline();
         tl.to("#pentagram-img", {duration: 1, opacity: 1})
-            .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -4000, ease: "power4.in"})
+            .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
-            .to(".pentagram-cont", {duration: 6, delay: -6 , opacity: 0, ease: "power4.in", onComplete: Animation.pentagramDisplay})
+            .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
             
     };
 
+    static cursesInterval() {
+        let rCurse = window.setInterval(Curse.randomCurse, 150);
+
+        function clear(){
+            clearInterval(rCurse)
+        }
+
+        window.setTimeout(clear, 5000);
+
+    }
+
 };
 
+Animations.cursesInterval();
 
 
 
