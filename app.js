@@ -86,14 +86,13 @@ class Animations {
 
     static cursesInOut() {
         let tl = gsap.timeline();
-        tl.to('.curse', {duration: 0.20 , opacity: 1, onStart: Animations.displayCurse})
-            .to('.curse', {duration: 0.20 , opacity: 0})
-            .to('.curse', {opacity:1, duration: 0.20})
+        tl.to('.curse', {duration: 0.25, opacity: 0, onComplete: Animations.displayCurse})
+          .to('.curse', {opacity:1, duration: 0.25})
     };
   
     static cursesInterval() {
         Animations.displayCursesCont();
-        let rCurse = window.setInterval(Animations.cursesInOut, 400);
+        let rCurse = window.setInterval(Animations.cursesInOut, 500);
         function clear(){
             clearInterval(rCurse)
         }
