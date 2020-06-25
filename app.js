@@ -56,12 +56,25 @@ class Functionality {
         };     
     };
 
+    static checkFlames() {
+        let check = setInterval(repeatCheck, 500);
+        function repeatCheck() {
+            if (flamesCounter === 0) {
+                clearInterval(check);
+                Animations.master();
+                console.log('it works');
+            }
+        }
+    }
+
     static randomCurse() {
         let curse = '';
         let index = Math.floor(Math.random() * curses.length)
         curse = curses[index];
         return curse;
     };
+
+
 };
 
 
@@ -87,9 +100,11 @@ class Animations {
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
           .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
           .to('#curse-txt',{opacity:1, duration:0, delay: 0})
           .to('#curse-txt',{opacity:0, duration:2, delay: 0.1, onComplete: Animations.titleDisplay})
-          .to('.pentagram-cont', {opacity:1, duration:2, onStart:Animations.pentagramDisplayOn})
+          .to('.pentagram-cont', {opacity:1, duration:1, onStart:Animations.pentagramDisplayOn})
     }
 
 
@@ -152,16 +167,17 @@ class Animations {
             clearInterval(rCurse);
             Animations.curseIs();
         }
-        window.setTimeout(clear, 3000);
+        window.setTimeout(clear, 4000);
     }
 
     static master(){
         let tl = gsap.timeline();
-        tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
+        tl.to('#flame-instructions', {duration: 1, opacity:0})
+            .to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 4, delay: -1.5, opacity: 1, ease: "power2.out", onStart: Animations.cursesInterval})
+            .to('.curse-cont', {duration: 5, delay: -1.5, opacity: 1, ease: "power4.out", onStart: Animations.cursesInterval})
             
             
     };
@@ -169,16 +185,17 @@ class Animations {
 
 
 
+
 document.querySelectorAll('.flame').forEach(flame => {
     flame.addEventListener('click', (e) => {  
-        if (flamesCounter === 0) {
-            
-            Animations.master();
-        } else {
+        
         Functionality.flamesOut(e.target);
-        }
+        
      });
 });
+
+Functionality.checkFlames()
+
 
 document.querySelectorAll('.title').forEach(title => title.addEventListener("click", ()=> {
     Animations.title();
