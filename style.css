@@ -134,7 +134,7 @@ body {
   text-shadow: 1px 1px 6px red;
 }
 
-.curse-title span {
+.curse-title #curse-span {
   font-size: 2.5rem;
   color: #d43131;
 }
