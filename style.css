@@ -33,6 +33,7 @@ body {
 
 .title {
   color: #7e0101;
+  top: -50px;
   font-family: "Piedra";
   color: #850b0b;
   position: relative;

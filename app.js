@@ -82,13 +82,16 @@ class Functionality {
 
     static setCurseLocal(){
         window.localStorage.setItem('curse', curse);
+        
     };
 
     static getCurseLocal(){
         let x = window.localStorage.getItem('curse');
         if (x !== null) {
+            curse = x;
             Animations.cursedTitleScreen();
-            console.log('youve been cursed!')
+            
+           
         }
     };
 
@@ -145,6 +148,7 @@ class Animations {
     //Picks a random curse and paints it.
     static displayCurse() {
         curse = Functionality.randomCurse();
+        Functionality.setCurseLocal()
         document.querySelector('.curse').textContent = `${curse}`;
     };
 
@@ -200,13 +204,14 @@ class Animations {
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 5, delay: -1.5, opacity: 1, ease: "power4.out", onStart: Animations.cursesInterval, onComplete:Functionality.setCurseLocal})
+            .to('.curse-cont', {duration: 5, delay: -1.5, opacity: 1, ease: "power4.out", onStart: Animations.cursesInterval})
     };
 
     static cursedTitleScreen(){
         Animations.titleDisplay();
         Animations.displayCursesCont();
         Animations.curseIs();
+        document.querySelector('.curse').textContent = `${curse}`
         document.querySelector('#flame-already-cursed').style.display = 'block';
         gsap.to('.curse-cont', {duration:3, opacity:1})
     }
