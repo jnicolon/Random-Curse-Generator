@@ -22,7 +22,10 @@ const curses = [
     'maybe your ex was right',
     'you meet a man with a ponytail',
     'the venezuelan birthday song is the regular song',
-    'people think you wrote chappie'
+    'people think you wrote chappie',
+    'all blankets are too short',
+    'you meet Macarena and she is not that great',
+    'remember the Alamo but the wrong one',
 ];
 
 class Functionality {
@@ -89,7 +92,7 @@ class Animations {
         let tm = gsap.timeline();
         tm.to('#random-txt', {x:-300, y:-200, opacity:0, duration:2, ease: 'power1.in'})
           .to('#generator-txt', {x:+300, y:+200, opacity:0, delay:-1.90, duration:2, ease: 'power1.in'})
-          .to('#curse-txt',{opacity:0, duration:0, delay: 0.25})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.10})
           .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.75})
           .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
@@ -102,9 +105,10 @@ class Animations {
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
           .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
-          .to('#curse-txt',{opacity:1, duration:0, delay: 0})
-          .to('#curse-txt',{opacity:0, duration:2, delay: 0.1, onComplete: Animations.titleDisplay})
-          .to('.pentagram-cont', {opacity:1, duration:1, onStart:Animations.pentagramDisplayOn})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1,onComplete: Animations.titleDisplay})
+          .to('.pentagram-cont', {opacity:1, duration:2, delay:1, onStart:Animations.pentagramDisplayOn})
+          .to('#flame-instructions', {duration: 1, opacity:1, delay: -1})
     }
 
 
@@ -188,7 +192,7 @@ class Animations {
 
 document.querySelectorAll('.flame').forEach(flame => {
     flame.addEventListener('click', (e) => {  
-        
+
         Functionality.flamesOut(e.target);
         
      });
