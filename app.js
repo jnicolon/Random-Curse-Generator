@@ -18,7 +18,7 @@ const curses = [
     'like a web toe but for your armpit',
     'wet socks',
     'someone always looking at your phone screen',
-    'stuck in the EEEEEEE of the Macarena',
+    "can't identify smell",
     'maybe your ex was right',
     'you meet a man with a ponytail',
     'the venezuelan birthday song is the regular song',
@@ -95,18 +95,35 @@ class Animations {
         tl.fromTo('.curse-title', {scale: 0, y:200}, {scale: 1.2, y:20, duration:3})
         tl.fromTo('.curse', {scale: 0}, {scale: 1, duration:3, delay: -3})
     }
+
+    //not used but call it on the clear function  on cursesInterval to try
+    static curseBeat() {
+        let tl = gsap.timeline();
+        tl.fromTo('#curse-span', {opacity:1},{opacity:0.5, duration:0.5})
+          .to('#curse-span',{opacity:1, duration: 0.5})
+        tl.delay(2)
+        tl.repeat(-1);
+    }
+
+    static curseIs() {
+        function changeTxt(){
+            document.querySelector('#is').textContent = "is...";
+        }
+        gsap.fromTo('curse-title', {opacity:0}, {opacity: 1, duration:1, onStart: changeTxt})
+    }
+
   
     static cursesInterval() {
         Animations.displayCursesCont();
         Animations.curseBigOut();
+        
         let rCurse = window.setInterval(Animations.cursesInOut, 500);
         function clear(){
-            clearInterval(rCurse)
+            clearInterval(rCurse);
+            Animations.curseIs();
         }
-        window.setTimeout(clear, 6000);
+        window.setTimeout(clear, 4000);
     }
-
-
 
     static master(){
         let tl = gsap.timeline();
@@ -114,7 +131,7 @@ class Animations {
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 3, delay: -2, opacity: 1, ease: "power1.in", onStart: Animations.cursesInterval})
+            .to('.curse-cont', {duration: 4, delay: -1.5, opacity: 1, ease: "power2.out", onStart: Animations.cursesInterval})
             
             
     };
