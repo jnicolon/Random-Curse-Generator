@@ -67,12 +67,42 @@ class Functionality {
 
 
 class Animations {
+
+    static titleDisplay(){
+        document.querySelectorAll('.title').forEach(title => title.style.display = "none");
+    }
+
+    static title() {
+        let tm = gsap.timeline();
+        tm.to('#random-txt', {x:-300, y:-200, opacity:0, duration:2, ease: 'power1.in'})
+          .to('#generator-txt', {x:+300, y:+200, opacity:0, delay:-1.90, duration:2, ease: 'power1.in'})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.25})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.75})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.2})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0})
+          .to('#curse-txt',{opacity:0, duration:2, delay: 0.1, onComplete: Animations.titleDisplay})
+          .to('.pentagram-cont', {opacity:1, duration:2, onStart:Animations.pentagramDisplayOn})
+    }
+
+
     static flamesDisplayOff(){
         document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
     }
 
     static pentagramDisplay(){
         document.querySelector('.pentagram-cont').style.display = "none";
+    }
+
+    static pentagramDisplayOn(){
+        document.querySelector('.pentagram-cont').style.display = "flex";
     }
 
     static displayCursesCont(){
@@ -122,7 +152,7 @@ class Animations {
             clearInterval(rCurse);
             Animations.curseIs();
         }
-        window.setTimeout(clear, 4000);
+        window.setTimeout(clear, 3000);
     }
 
     static master(){
@@ -150,3 +180,9 @@ document.querySelectorAll('.flame').forEach(flame => {
      });
 });
 
+document.querySelectorAll('.title').forEach(title => title.addEventListener("click", ()=> {
+    Animations.title();
+}));
+
+//document.querySelectorAll('.title').forEach(title => title.removeEventListener("click", ()=> {
+//        Animations.title;}));
