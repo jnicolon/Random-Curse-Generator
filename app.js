@@ -89,15 +89,24 @@ class Animations {
         tl.to('.curse', {duration: 0.25, opacity: 0, onComplete: Animations.displayCurse})
           .to('.curse', {opacity:1, duration: 0.25})
     };
+
+    static curseBigOut() {
+        let tl = gsap.timeline();
+        tl.fromTo('.curse-title', {scale: 0, y:200}, {scale: 1.2, y:20, duration:3})
+        tl.fromTo('.curse', {scale: 0}, {scale: 1, duration:3, delay: -3})
+    }
   
     static cursesInterval() {
         Animations.displayCursesCont();
+        Animations.curseBigOut();
         let rCurse = window.setInterval(Animations.cursesInOut, 500);
         function clear(){
             clearInterval(rCurse)
         }
-        window.setTimeout(clear, 10000);
+        window.setTimeout(clear, 6000);
     }
+
+
 
     static master(){
         let tl = gsap.timeline();
@@ -105,7 +114,7 @@ class Animations {
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 10, delay: -1, opacity: 1, ease: "power2.out", onStart: Animations.cursesInterval})
+            .to('.curse-cont', {duration: 3, delay: -2, opacity: 1, ease: "power1.in", onStart: Animations.cursesInterval})
             
             
     };

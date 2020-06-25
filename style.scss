@@ -13,6 +13,7 @@
 }
 
 
+
 body {
     background-color: rgb(0, 0, 0);
     position: relative;
@@ -39,7 +40,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: hidden;   
+       
 
     display: flex;
     
@@ -50,10 +51,6 @@ body {
     display: block;
     height: 100%;  
     opacity: 0;
-    
-    
-    
-    
 }
 
 
@@ -102,12 +99,16 @@ body {
     padding: 20px;
     //border: 1px solid white;
     width: 600px;
+    
 
     opacity: 0;
     display: none;
     
 
 }
+
+
+
 
 .curse-title {
     font-family: 'Walter Turncoat', cursive;
@@ -118,7 +119,8 @@ body {
     text-shadow: 1px 1px 6px red;
    
 
-    span {
+
+    #curse-span {
         font-size: 2.5rem;
         color: rgb(212, 49, 49)
     }
@@ -140,4 +142,74 @@ body {
 button {
     position: absolute;
     top: 600px;
+}
+
+
+@media screen and (max-width: 400px)  {
+
+    .pentagram-cont {
+        
+        width: 100vw;
+        height: 340px;
+        overflow: visible;
+    }
+
+    #pentagram-img {
+        opacity: 0;
+        height: 130%;
+    }
+
+
+
+    #flame1 {
+        
+        left: 10px;
+        top: -110px;
+    }
+    
+    #flame2 {
+       
+        left: 245px;
+        top: -110px;
+    }
+    
+    #flame3 {
+       
+        left: 290px;
+        top: 60px;
+    }
+    
+    #flame4 {
+        
+        left: 135px;
+        top: 180px;
+        
+    }
+    
+    #flame5 {
+        
+        left: -30px;
+        top: 60px;
+    }
+
+
+    .curse-cont {
+        width: 90vw;
+        
+        top: 0;
+        padding: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        
+    }
+
+    .curse-title {
+        width: 50%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
 }
