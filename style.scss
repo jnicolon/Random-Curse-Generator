@@ -32,6 +32,36 @@ body {
     
 }
 
+.title {
+    color: rgb(126, 1, 1);
+    
+    font-family: "Piedra";
+    color: rgb(133, 11, 11);
+    position: relative;
+    text-transform: uppercase;
+    font-size: 10rem;
+    text-shadow: 1px 1px 5px red;
+    cursor: pointer;
+
+    display: block;
+}
+
+#random-txt {
+    font-size: 5rem;
+}
+
+#curse-txt {
+    font-size: 12rem;
+}
+
+#generator-txt {
+    font-size: 5rem;
+}
+
+
+
+
+
 .pentagram-cont {
     width: 500px;
     height: 500px;
@@ -40,8 +70,9 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-
-    display: flex;
+    
+    opacity: 0;
+    display: none;
     
 }
 
@@ -83,6 +114,33 @@ body {
     left: 10px;
     top: 135px;
 }
+
+#flame-instructions {
+    color: rgb(175, 99, 0);
+    font-size:  1rem;
+    font-family: 'Walter Turncoat', cursive;
+    margin-top: 30px;
+    margin-left: 30px;
+
+    opacity: 0;
+
+    
+}
+
+#flame-already-cursed {
+    color: rgb(175, 99, 0);
+    font-size:  1rem;
+    font-family: 'Walter Turncoat', cursive;
+    margin-top: 100px;
+    margin-left: 30px;
+
+    opacity: 1;
+    display: none;
+
+    
+}
+
+
 
 
 

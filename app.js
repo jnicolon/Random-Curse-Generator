@@ -22,8 +22,14 @@ const curses = [
     'maybe your ex was right',
     'you meet a man with a ponytail',
     'the venezuelan birthday song is the regular song',
-    'people think you wrote chappie'
+    'people think you wrote chappie',
+    'all blankets are too short',
+    'you meet Macarena and she is not that great',
+    'remember the Alamo but the wrong one',
 ];
+
+//Global for using with local storage
+let curse = "";
 
 class Functionality {
     static flamesOut(flame) {
@@ -56,17 +62,70 @@ class Functionality {
         };     
     };
 
+    static checkFlames() {
+        let check = setInterval(repeatCheck, 500);
+        function repeatCheck() {
+            if (flamesCounter === 0) {
+                clearInterval(check);
+                Animations.master();
+            }
+        }
+    }
+
     static randomCurse() {
         let curse = '';
         let index = Math.floor(Math.random() * curses.length)
         curse = curses[index];
-        return curse;
+        return curse
+
     };
+
+    static setCurseLocal(){
+        window.localStorage.setItem('curse', curse);
+    };
+
+    static getCurseLocal(){
+        let x = window.localStorage.getItem('curse');
+        if (x !== null) {
+            Animations.cursedTitleScreen();
+            console.log('youve been cursed!')
+        }
+    };
+
+
 };
 
 
 
 class Animations {
+
+    static title() {
+        let tm = gsap.timeline();
+        tm.to('#random-txt', {x:-300, y:-200, opacity:0, duration:2, ease: 'power1.in'})
+          .to('#generator-txt', {x:+300, y:+200, opacity:0, delay:-1.90, duration:2, ease: 'power1.in'})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.10})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.75})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.2})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:1, duration:0, delay: 0.1})
+          .to('#curse-txt',{opacity:0, duration:0, delay: 0.1,onComplete: Animations.titleDisplay})
+          .to('.pentagram-cont', {opacity:1, duration:2, delay:1, onStart:Animations.pentagramDisplayOn})
+          .to('#flame-instructions', {duration: 1, opacity:1, delay: -1})
+    }
+
+    static titleDisplay(){
+        document.querySelectorAll('.title').forEach(title => title.style.display = "none");
+    }
+
     static flamesDisplayOff(){
         document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none') 
     }
@@ -75,28 +134,36 @@ class Animations {
         document.querySelector('.pentagram-cont').style.display = "none";
     }
 
+    static pentagramDisplayOn(){
+        document.querySelector('.pentagram-cont').style.display = "flex";
+    }
+
     static displayCursesCont(){
         document.querySelector('.curse-cont').style.display = "flex";
     }
 
+    //Picks a random curse and paints it.
     static displayCurse() {
-        let curse = Functionality.randomCurse();
+        curse = Functionality.randomCurse();
         document.querySelector('.curse').textContent = `${curse}`;
     };
 
+    //Displays each random curse with a fade in and out in the roullete.
     static cursesInOut() {
         let tl = gsap.timeline();
         tl.to('.curse', {duration: 0.25, opacity: 0, onComplete: Animations.displayCurse})
           .to('.curse', {opacity:1, duration: 0.25})
     };
 
+    //Animation for things coming inside the pentagram
     static curseBigOut() {
         let tl = gsap.timeline();
         tl.fromTo('.curse-title', {scale: 0, y:200}, {scale: 1.2, y:20, duration:3})
         tl.fromTo('.curse', {scale: 0}, {scale: 1, duration:3, delay: -3})
     }
 
-    //not used but call it on the clear function  on cursesInterval to try
+    //Maes the CURSE word fade in and out.
+    //Not used but call it on the clear function  on cursesInterval to try
     static curseBeat() {
         let tl = gsap.timeline();
         tl.fromTo('#curse-span', {opacity:1},{opacity:0.5, duration:0.5})
@@ -105,6 +172,7 @@ class Animations {
         tl.repeat(-1);
     }
 
+    //Changes the last words of "your curse will be"
     static curseIs() {
         function changeTxt(){
             document.querySelector('#is').textContent = "is...";
@@ -122,31 +190,50 @@ class Animations {
             clearInterval(rCurse);
             Animations.curseIs();
         }
-        window.setTimeout(clear, 4000);
+        window.setTimeout(clear, 5000);
     }
 
     static master(){
         let tl = gsap.timeline();
-        tl.to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
+        tl.to('#flame-instructions', {duration: 1, opacity:0})
+            .to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 4, delay: -1.5, opacity: 1, ease: "power2.out", onStart: Animations.cursesInterval})
-            
-            
+            .to('.curse-cont', {duration: 5, delay: -1.5, opacity: 1, ease: "power4.out", onStart: Animations.cursesInterval, onComplete:Functionality.setCurseLocal})
     };
+
+    static cursedTitleScreen(){
+        Animations.titleDisplay();
+        Animations.displayCursesCont();
+        Animations.curseIs();
+        document.querySelector('#flame-already-cursed').style.display = 'block';
+        gsap.to('.curse-cont', {duration:3, opacity:1})
+    }
+
 };
 
 
 
+//When you click the flames, they slowly start fading and the counter goes down.
 document.querySelectorAll('.flame').forEach(flame => {
     flame.addEventListener('click', (e) => {  
-        if (flamesCounter === 0) {
-            
-            Animations.master();
-        } else {
+
         Functionality.flamesOut(e.target);
-        }
+        
      });
 });
 
+//Set interval function for when all flames are extinguished
+Functionality.checkFlames()
+
+//Event listener for the animation of the title screen
+document.querySelectorAll('.title').forEach(title => title.addEventListener("click", ()=> {
+    Animations.title();
+}));
+
+//document.querySelectorAll('.title').forEach(title => title.removeEventListener("click", ()=> {
+//        Animations.title;}));
+
+
+Functionality.getCurseLocal();
