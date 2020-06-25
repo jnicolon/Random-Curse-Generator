@@ -21,11 +21,13 @@ const curses = [
     "can't identify smell",
     'maybe your ex was right',
     'you meet a man with a ponytail',
-    'the venezuelan birthday song is the regular song',
     'people think you wrote chappie',
     'all blankets are too short',
     'you meet Macarena and she is not that great',
     'remember the Alamo but the wrong one',
+    'two drawers for utensils',
+    'crossed eye nipples',
+    'always off timing on "sweet Caroline"',
 ];
 
 //Global for using with local storage
@@ -104,8 +106,8 @@ class Animations {
 
     static title() {
         let tm = gsap.timeline();
-        tm.to('#random-txt', {x:-300, y:-200, opacity:0, duration:2, ease: 'power1.in'})
-          .to('#generator-txt', {x:+300, y:+200, opacity:0, delay:-1.90, duration:2, ease: 'power1.in'})
+        tm.to('#random-txt', {x:-300, y:-200, scale:0.5, opacity:0, duration:2, ease: 'power1.in'})
+          .to('#generator-txt', {x:+300, y:+200, opacity:0, scale:0.5, delay:-1.90, duration:2, ease: 'power1.in'})
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.10})
           .to('#curse-txt',{opacity:1, duration:0, delay: 0.2})
           .to('#curse-txt',{opacity:0, duration:0, delay: 0.75})
@@ -162,8 +164,8 @@ class Animations {
     //Animation for things coming inside the pentagram
     static curseBigOut() {
         let tl = gsap.timeline();
-        tl.fromTo('.curse-title', {scale: 0, y:200}, {scale: 1.2, y:20, duration:3})
-        tl.fromTo('.curse', {scale: 0}, {scale: 1, duration:3, delay: -3})
+        tl.fromTo('.curse-title', {scale: 0, y:200}, {scale: 1.2, y:20, duration:4})
+        tl.fromTo('.curse', {scale: 0}, {scale: 1, duration:4, delay: -4})
     }
 
     //Maes the CURSE word fade in and out.
@@ -181,10 +183,11 @@ class Animations {
         function changeTxt(){
             document.querySelector('#is').textContent = "is...";
         }
-        gsap.fromTo('curse-title', {opacity:0}, {opacity: 1, duration:1, onStart: changeTxt})
+        gsap.fromTo('curse-title', {opacity:0}, {opacity: 1, duration:1, delay:0.2, onStart: changeTxt})
     }
 
-  
+
+    
     static cursesInterval() {
         Animations.displayCursesCont();
         Animations.curseBigOut();
@@ -197,16 +200,18 @@ class Animations {
         window.setTimeout(clear, 5000);
     }
 
+    //Not actually the full master, just the master for after the candles are extinguished.
     static master(){
         let tl = gsap.timeline();
         tl.to('#flame-instructions', {duration: 1, opacity:0})
-            .to("#pentagram-img", {duration: 1, opacity: 1, ease: "power3.in"})
+            .to("#pentagram-img", {duration: 1, opacity: 1, ease: "power1.in"})
             .to("#pentagram-img", {duration: 10, delay: -0.7, rotate: -5000, ease: "power3.in"})
             .to(".pentagram-cont", {duration: 6, delay: -6 , scale: 11, ease: "power4.in"})
             .to(".pentagram-cont", {duration: 4, delay: -3.7 , opacity: 0, ease: "power2.in", onComplete: Animations.pentagramDisplay})
-            .to('.curse-cont', {duration: 5, delay: -1.5, opacity: 1, ease: "power4.out", onStart: Animations.cursesInterval})
+            .to('.curse-cont', {duration: 6, delay: -1.5, opacity: 1, ease: "power4.out", onStart: Animations.cursesInterval})
     };
 
+    //Displays the title screen for when you've already been cursed.
     static cursedTitleScreen(){
         Animations.titleDisplay();
         Animations.displayCursesCont();
@@ -240,5 +245,5 @@ document.querySelectorAll('.title').forEach(title => title.addEventListener("cli
 //document.querySelectorAll('.title').forEach(title => title.removeEventListener("click", ()=> {
 //        Animations.title;}));
 
-
+//Goes to local storage and checks is it's empty to decide what title screen to show
 Functionality.getCurseLocal();

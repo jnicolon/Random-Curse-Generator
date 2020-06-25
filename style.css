@@ -200,6 +200,15 @@ button {
 }
 
 @media screen and (max-width: 400px) {
+  #random-txt {
+    font-size: 3rem;
+  }
+  #curse-txt {
+    font-size: 7rem;
+  }
+  #generator-txt {
+    font-size: 3rem;
+  }
   .pentagram-cont {
     width: 100vw;
     height: 340px;
