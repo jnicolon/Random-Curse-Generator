@@ -1,6 +1,8 @@
 
 ## Random Curse Generator
 
+Live website: https://jnicolon.github.io/Random-Curse-Generator/
+
 A generator that randomly picks a funny curse for the user.
 
 It was made with vanilla javascript, html, sass for css with the gsap framework for the animations.
